@@ -24,3 +24,51 @@
 	* | equivalent to OR: at least one "1" in an operand
 	* ^ equivalent to EITHER-OR: only one "1" in both operands
 
+## Assingment Operators
+	* Assign (=)
+		** When using arrays, assign value to keys with =>
+	* Short forms (combined)
+		** Assignment (+ and operator)
+			Works with operators: - * / & | ^ >> <<
+			Ex: $a += 1; is short-hand for $a = $a + 1;
+		** Combined/concatenating assingment (.=)
+			Ex: $a = "Hello,";
+			    $a.= "World !"; ...results in "hello, world!"
+	* Increase / decrease (++ --)
+		** Placement important: in front of expression - increased or descrease first; after expression, the reverse
+
+## Comparison operators
+	* Equality (==)		Inequality (!=)
+	Php handles data type conversion "123" == 123
+	(===)			(!==)
+	PHP checks the data type "123" !== 123
+	* Greater than (>) 	Less than (<)
+	* Grater or equal (>=)	LEss than or equal (<=)
+ 
+## String operators
+	* Concatenate (.) and concatenating assingment (.=) see above
+
+## Array operators
+	+ union
+	== equal
+	=== identical
+	!= not equal
+	<> not equal
+	!== not identical
+
+## Logical operators
+
+	Example		Operator	Evaluates as true when
+	$a and $b	and		Both $a and $b true
+	$a or $b	or		Either $a or $b true
+	$a xor $b	xor		Either $a,$b true; not both
+	! $a		not		$a not true
+	$a && $b	and		both $a and $b true
+	$a || $b	or		either $a or $b true
+
+## Execution operators
+	* use backticks `` to execute the contents enclosed by them as a shell command, equivalent to shell_exec()
+
+## Operator precedence
+	* follows mathematical precedence in most instances (Ex: multiplication/division precedes addition/subtractions)
+	* use parentheses to enforce non-standard precedence
