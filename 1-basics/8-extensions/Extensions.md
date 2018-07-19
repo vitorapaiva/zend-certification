@@ -24,3 +24,17 @@
 	* Userland refers to those applications that run in the user space (not the kernel)
 
 	* Select rules: (see the complete listing in the php manual) (REVISAR)
+
+## Global Namespace Constructs (REVISAR)
+
+	* Functions
+	* Classes
+	* Interfaces
+	* Constants (other than class)
+	* Variables (defined outside of functions or methods)
+
+## Internal Naming
+
+	* Functions use underscores between words
+	* Classes us the camelCase rule
+	* The double underscore prefix is reserved, and refers to elements considered magical
