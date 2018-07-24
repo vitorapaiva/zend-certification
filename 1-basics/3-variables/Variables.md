@@ -2,16 +2,16 @@
 
 ## Naming
 * Start with a "$"
-* Contains letters, numbers, and underscores
-* By convention, start with lower case
+* Can contain letters, numbers, and underscores
+* Must start with letter or underscore and by convention should start with lower case letter or underscore
 * Case-sensitive
 
 ## Referencing
 * Variables can be assigned by value or by reference
-* Attach an "&" to the beginning of the variable being assigned
+* The ampersand (&) creates a reference, or alias, and causes both the original variable and alias to point to the same memory value (REVISAR)
 
 ## Initializing
-* Variables have their type set by default, if not initialized (which is optional)
-* Not initializing variables can potentialy lead to repetitive variable names (and collisions) when working with multiple files
-* isset() is used to determine whether a variable has been initialized
+* Variables typing is set automacatically by the PHP parser and called "Type juggling/coercion"
+* Initializing variables empty is a good practice if it is possible it already points to memory values and you want to start empty
+* The function isset() returns a boolean on a passed variable containing a value other than null string, null or zero
 

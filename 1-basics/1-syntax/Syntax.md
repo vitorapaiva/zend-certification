@@ -8,10 +8,10 @@
 
 ### Opening
 	*<?php
-	*<script language='php'>
+	*<?= (short for <?php echo)
 ## Closing
 	*?>
-	*</script>
+	*?>
 
 ## Comments
 	//Used for a single comment line
