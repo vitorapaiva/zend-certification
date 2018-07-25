@@ -20,19 +20,31 @@
 
 * Use one namespace per code file (best practice)
 
-* Unless a namespace is defined, classes and functions are contained within the global space
-	* Prepend "\" to indicate use of an element from global scope (REVISAR)
+* Unless a namespace is defined, constants, classes, functions, traits and interfaces are defined with the global space
+	* Within a namespace qualifying with a "\" references the global namespace
 
 * Once code elements within a single namespace are defined, they can be used in other php files
+Example:
+	namespace NS {
+		class Db {
+			public function getInstance(){
+				return new \pdo(...);
+			}
+		}
+	}
 
 ## Importing/Aliasing namespaces
 
 * Once declared, import namespace with the "use" operator
 
+* Declarations may be grouped (use m\namespace\{A,B,C}) (REVISAR)
+
 * Can create aliases for namespaces
-	* Ex: If complete namespace name is path1pth2path3, set =E then, when need to call, can reference alias as E/PATH4 (REVISAR)
+	* Ex: 
+		Use Path1\Path2\Path3 as E;
+		$test = new E\Some_Class();
 
 ## Note
 
-* Namespaces are not equivalent to classes. A class is an abstract definition of an object, while a namespace is an evironment in which a class, function, or a constant can be defined
+* Namespaces are not equivalent to classes. A namespace is an execution enviroment isolation in which a class, function, constant, trai and interface are defined and therefore protected from naming collisions from a different environment
 

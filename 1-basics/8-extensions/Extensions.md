@@ -15,7 +15,7 @@
 
 ## CORE Extensions (REVISAR)
 
-	* There are a set of various php language elements, called core extensions, thare are part of the php core
+	* There are a set of various php language elements, called core extensions, that are part of the php core
 
 	* They include specific arrays, classes, objects, etc
 
@@ -36,5 +36,5 @@
 ## Internal Naming
 
 	* Functions use underscores between words
-	* Classes us the camelCase rule
+	* Classes us the CamelCase rule
 	* The double underscore prefix is reserved, and refers to elements considered magical
