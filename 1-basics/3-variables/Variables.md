@@ -8,7 +8,15 @@
 
 ## Referencing
 * Variables can be assigned by value or by reference
-* The ampersand (&) creates a reference, or alias, and causes both the original variable and alias to point to the same memory value (REVISAR)
+* The ampersand (&) creates a reference, or alias, and causes both the original variable and alias to point to the same memory value
+	Ex:
+		$a=10;
+		$b=&$a;
+		echo $a.'<br>'; //(10)
+		echo $b.'<br>'; //(10)
+		$a=12;
+		echo $a.'<br>'; //(12)
+		echo $b.'<br>'; //(12)
 
 ## Initializing
 * Variables typing is set automacatically by the PHP parser and called "Type juggling/coercion"

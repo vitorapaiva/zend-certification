@@ -15,12 +15,15 @@
 	* Use to work with bits withing an integer; arithmetic
 	* Integral Numbers are internally converted into bits
 		**Ex: 5 -> 0101 = 0*8 + 1*4 + 0*2 + 1*1
-	* & equivalent to 'AND': matching "1" in both operands
-	* | equivalent to OR: at least one "1" in an operand
-	* ^ equivalent to XOR: true only if operands are diferent
-	* Shift bits << X move bits by X times
-		** Ex: 4 >> 2 == 1 (like dividing by 4)
-	* Negate bits ~ convert 0s into 1s ; 1s into 0s
+	* $a & $b equivalent to 'AND': matching "1" in both operands
+	* $a | $b equivalent to OR: at least one "1" in an operand
+	* $a ^ $b equivalent to XOR: true only if operands are diferent
+	* $a << $b Shift bits from $a by $b times
+		** Ex: 4 << 2 == 16 (each step meaning multiply by two)
+	* $a >> $b Shift bits from $a by $b times
+		** Ex: 4 >> 2 == 1 (each step meaning divide by two)
+	* ~$a (NOT) convert 0s into 1s ; 1s into 0s
+		** Ex: ~11==-12
 
 ## Assingment Operators
 	* Assign (=)
@@ -32,9 +35,14 @@
 		* Combined/concatenating assingment (.=)
 			Ex: $a = "Hello,";
 			    $a.= "World !"; ...results in "hello, world!"
-	* Increase / decrease (++ --) (REVISAR)
+	* Increase / decrease (++ --) 
 		* Placement important: in front of expression - increased or descrease first; after expression, the reverse
-
+			Ex:
+			$a=0;
+			$b=0;
+			echo ++$a; //(result 1)
+			echo $b++; //(result 0)
+			
 ## Comparison operators
 	* Value Equality (==)		Value Inequality (!=)
 	Php handles data type conversion "123" == 123
