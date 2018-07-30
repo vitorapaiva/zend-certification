@@ -9,11 +9,11 @@
 ### Opening
 	*<?php
 	*<?= (short for <?php echo)
-## Closing
+### Closing
 	*?>
 	*?>
 
-## Comments
+### Comments
 	//Used for a single comment line
 	//Must be repeated for multiple lines
 	
@@ -48,7 +48,56 @@
 		** Ex: 4 >> 2 == 1 (each step meaning divide by two)
 	* ~$a (NOT) convert 0s into 1s ; 1s into 0s
 		** Ex: ~11==-12
+	According to W3C, Bitwise operators allow operating on the bitwise representation of their arguments. 
+### What is a bit?
+	A bit (Binary digIT) is the basic unit of information stored in the computing system that exists in two possible states, represented as ON or OFF. In a computer system, the ON state considered as 1 and OFF state considered as 0. These states can be compared with two states of a flip-flop, two states of an electric switch ( ON and OFF) e.t.c. These two values 0 and 1 are called Binary digit and these digits are in a specific number system, that is BINARY number system which constructs upon the base of 2.
+	In decimal number system, a number construct upon the base of 10. Let us see how a decimal number can be constructed -
 
+	  231=(2 x 102)+(3 x 101)+(1 x 100)
+	      =200+30+1
+	      =231
+
+	The binary number system also follows the same concept. The only difference is the base is 2 instead of 10. Let us see how a binary number can be converted into a decimal number -
+
+	1011010=(1 x 26)+(0 x 25)+(1 x 24)+(1 x 23)+(0 x 22)+(1 x 21)+(0 x 20)
+		  =(1 x 64) +(0 x 32)+(1 x 16)+(1 x 8)+(0 x 4)+(1 x 2)+(0 x 1)
+		  =64+0+16+8+0+2+0
+		  =90
+
+	So, (1011010)2= (90)10  
+	
+	<?php
+	$x=77;
+	$y=198;
+	echo $x & $y; // 68
+	?>
+	Placing in a table, they share two bits in two places (64, 4)
+	Place Value 	128 	64 	32 	16 	8 	4 	2 	1 	  	 
+		$x 	0 	1 	0 	0 	1 	1 	0 	1 	= 	77
+		$y 	1 	1 	0 	0 	0 	1 	1 	0 	= 	198
+		
+	<?php
+	$x=5;
+	$y=11;
+	echo $x | $y; //15
+	?>
+	The $x and $y sets together either 1st or 2nd or 3rd or 4th bits. So return value is the addition of place value of the sets bits, that is 8+4+2+1=15. 
+	1 Byte ( 8 bits )
+	Place Value 	128 	64 	32 	16 	8 	4 	2 	1 	  	 
+		$x 	0 	0 	0 	0 	0 	1 	0 	1 	= 	5
+		$y 	0 	0 	0 	0 	1 	0 	1 	1 	= 	11
+	
+	<?php
+	$x=12;
+	$y=11;
+	echo $x ^ $y; //7
+	?>
+	The $x and $y sets together either 1st or 2nd or 3rd or 4th bits but they shared together only a 4th bit. So return value is the addition of place value of the set bits but not the bit shared together, that is 4+2+1=7
+	1 Byte ( 8 bits )
+	Place Value 	128 	64 	32 	16 	8 	4 	2 	1 	  	 
+		$x 	0 	0 	0 	0 	1 	1 	0 	0 	= 	12
+		$y 	0 	0 	0 	0 	1 	0 	1 	1 	= 	11
+	
 ## Assingment Operators
 	* Assign (=)
 		* When using arrays, assign value to keys with =>
