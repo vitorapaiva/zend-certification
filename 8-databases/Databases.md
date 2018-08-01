@@ -64,7 +64,93 @@
 
 		SELECT * FROM tab1
 			INNER JOIN tab2
-			ON tab
+			ON tab1.primkey = tab2.forkey
+			WHERE tab1.col1 = 'value1'
 
+* Left Join
 
- 
+	Ex: All data from the "left" table is used, even if there is no match in the "right" table
+		SELECT * FROM tab1
+			LEFT JOIN tab2
+			ON tab1.primkey=tab2.forkey
+			WHERE tab1.col1='value'
+
+* Right Join
+	Ex: All data from the "right" table is used, even if there is no match in the "left" table
+		SELECT * FROM tab1
+			RIGHT JOIN tab2
+			ON tab1.primkey = tab2.forkey
+			WHERE tab2.col1='value1'
+
+# Prepared statements
+
+* Similar in concept to templates - contain compiled code used to run common sql operations
+	* Advantages:
+		* Query only parsed once, but allows for multiple executions, with same or different parameters (perfomance consideration)
+
+		* Related parameters do not need to be quoted (security consideration)
+
+	* Only feature PDO will emulate for adapters that do not support prepared statements
+
+# Transacations
+
+* Combines individual SQL operations into one
+
+* Usually start with begin or begin transaction
+
+* Execute the transaction using commit
+
+* Cancel the transaction using rollback 
+
+# PDO (PHP Data Objects Extension)
+
+* Provides interface for accessing databases - a data-access abstraction layer
+	* Can use the same functions to manipulate databases, regardless of DB type
+		* Not for data type or SQL abstraction
+
+* Must use database-specific PDO adapters to access a DB server
+
+	* Database adapters implementing PDO interfaces expose database-specific features as regular extensions functions
+
+* Runtime configuration options
+	* pdo.dsn.* in php.ini
+	* PDO::setAttribute()
+
+* Set of predefined class constants available
+
+* Error settings available: Silent, Warning and Exception
+
+* Connections
+
+	* Connections are made by creating and instance of the PDO class, *not* by creating instances of PDOStatement or PDOException
+	* Ex: CONNECTING TO MYSQL
+		<?php
+			$dbh=new PDO('mysql:host=localhost;dname=t$user,$pass)
+		?>
+
+# Queries
+
+	PDO::query()
+
+		Executes a SQL statement, in a single function call, and returns the resulting values as a PDOStatement object
+
+		Need to retrieve all data in the result set before calling query function again
+
+	Fetch
+
+		PDOStatement->setFetchMode
+			Sets the default fetch mode(Ex: Fetch_Column)
+
+			* Common fetch modes: PDO::FETCH*:_ASSOC,_OBJ,CLASS
+			* Default fetch mode: PDO::FETCH_BOTH
+
+	Transacations
+
+		PDO::beginTransacation()
+			Turns off autocommit mode for changes made to the database
+
+		PDO::commit()
+			Call to end transacation and commit changes
+
+		PDO::rollBack()
+			Call to reserve all changes made to the database and reactivate autocommit mode
