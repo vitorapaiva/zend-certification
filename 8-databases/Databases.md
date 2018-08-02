@@ -92,7 +92,7 @@
 
 	* Only feature PDO will emulate for adapters that do not support prepared statements
 
-# Transacations
+# Transactions
 
 * Combines individual SQL operations into one
 
@@ -154,3 +154,37 @@
 
 		PDO::rollBack()
 			Call to reserve all changes made to the database and reactivate autocommit mode
+
+# PDOStatement
+
+	* Only values can be bound(*NOT* entities, such as table names and column names)
+
+	* Only scalars can be bound to the values (not arrays or nulls)
+
+		PDO::prepare() and PDOStatement::execute()
+
+			PDO::prepare() is used to prepare the statement object, while PDOStatement::execute() is used to issue the statement
+
+			If using params, must either pass an array of input param value, or call PDOSatement::bindParam() to bind the parameter placeholders to the corresponding variables
+
+				PDOStatement::bindParam()
+
+				Binds the variable as a reference to the corresponding parameter placeholder in the SQL statement; evaluated only when PDOStatement::execute() is called
+
+				PDOStatement::bindValue()
+
+				Binds a literal value, or the current value of a variable, to the corresponding parameter placeholder in the SQL Statement
+
+				PDOStatement:bindColumn()
+
+				Binds a variable to a designated database column
+
+			PDOStatement::closeCursor()
+
+				Frees any resources tied to the PDOStatement object appropriate for a singe issue of a select statement
+
+			PDO::exec()
+
+				Executes a SQL satement in a single function call, and returns the number of rows (not the data) affected by the statement
+
+				Appropriate for multple calls to a select statement
