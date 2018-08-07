@@ -171,3 +171,59 @@ error_reporting = E_ALL
 	htmlspecialchars()
 	htmlentities()
 	strip_tags()
+
+# Password Hashing Api
+
+* Password security
+	* Do not save passwords in cleartext
+	* Legacy ways to create hash values:
+		md5() 32 characters, hexadecimal
+		shal() 40 characters, hexadecimal
+		* Cannot be reversed, but vulnerable to a brute-force attack, thus not considered secure
+	* Do not use hard-coding unless values also hashed
+	* Use crypt() or password hasing api (see next section)
+		password_hash($password, $algo, $options)
+		Hashes a password, given the provided algorithm (currently defaults to bcrypt) and options
+		password_get_info($hash)
+		Retrieves information about a hash (algorithm, options used)
+		password_needs_rehash($hash,$algo,$options)
+		Rehashes a hash if it does not met the algorithm and options
+		password_verify($password,$hash)
+		Verifies whether a hash matches a password 
+
+	* Options: array with values
+
+		cost
+		Algorithmic cost of the hashing; defaults to 1-; limit this value as it can be CPU intensive
+
+# File uploads
+
+	* $_FILES is filled with user-supplied data, and therefore poses risk
+		* Risk: file name can be forged
+		* Counter: use checks and basename()
+
+		* Risk: mime type can be forged
+		* Counter: ignore
+
+		* Risk: temp file name can be forged under certain conditions
+		* Counter: use *_upload_file() functions (*=is, move)
+
+# Data storage
+
+	* Database connections
+		* If using SQL to make connections, the code is subject to SQL injections (seel SQL injection section)
+
+	* Database design
+		* Employ principle of limited rights - assign only those privileges that are needed by user
+		* Do not expose DB server to the internet
+		* Isolate databases with sensitive information to separate network segments
+		* Require periodic password changes and encrypt before storing
+		* Read the logs
+
+# SSL
+
+	* Secure socket layer (SSL) encryption protects data as it is transmitted between client and server
+	* SSH (Secure Shell Protocol) encrypts the network connection between the client and the database server
+	* Augment data encryption as ciphertext using openSSL_encrypt(<params>) and openSSQL_decrypt(<params>)
+		* Encrypt data before insertion and decrypt with retrieval
+	* Store sensitive data as a hashed value
