@@ -34,7 +34,7 @@
 	* Modulus (remainder when dividing)
 		** Ex: $m = 5%2; // $m == 1
 
-## Bitwise operators (REVISAR)
+## Bitwise operators
 	
 	* Use to work with bits withing an integer; arithmetic
 	* Integral Numbers are internally converted into bits
@@ -59,7 +59,7 @@
 
 	The binary number system also follows the same concept. The only difference is the base is 2 instead of 10. Let us see how a binary number can be converted into a decimal number -
 
-	1011010=(1 x 26)+(0 x 25)+(1 x 24)+(1 x 23)+(0 x 22)+(1 x 21)+(0 x 20)
+	1011010=(1 x 2^6)+(0 x 2^5)+(1 x 2^4)+(1 x 2^3)+(0 x 2^2)+(1 x 2^1)+(0 x 2^0)
 		  =(1 x 64) +(0 x 32)+(1 x 16)+(1 x 8)+(0 x 4)+(1 x 2)+(0 x 1)
 		  =64+0+16+8+0+2+0
 		  =90
@@ -97,6 +97,25 @@
 	Place Value 	128 	64 	32 	16 	8 	4 	2 	1 	  	 
 		$x 	0 	0 	0 	0 	1 	1 	0 	0 	= 	12
 		$y 	0 	0 	0 	0 	1 	0 	1 	1 	= 	11
+	<?php
+	$x=12;
+	$y=10;
+	echo $x & ~ $y; //4
+	?>
+	Place Value	128	64	32	16	8	4	2	1	 	 
+		$x	0	0	0	0	1	1	0	0	=	12
+		$y	0	0	0	0	1	0	1	0	=	10
+	The $x and $y sets together either 1st or 2nd or 3rd or 4th bits but they shared together only a 4th bit. So return value is the 4, because of only bit sets in $x but not in $y.
+	
+	<?php
+	$x=12;
+	$y=10;
+	echo ~ $x &  $y; //2
+	?>
+	
+	In this case, the return value is 2 because the bit set on $y but not on $x.
+### Bit shifting
+	If a and b are two numbers, BIT SHIFTING shifts a bits b number of steps. each step refers to multiply by two if it is BIT SHIFT LEFT. If it is BIT SHIFT RIGHT, then each step refers to division by two. If the number can no longer be divided by two, the return is 0
 	
 ## Assingment Operators
 	* Assign (=)
@@ -172,7 +191,24 @@
 		$a=12;
 		echo $a.'<br>'; //(12)
 		echo $b.'<br>'; //(12)
-
+	Ex:
+		function add(&$var){ // The &amp; is before the argument $var
+		$var++;
+		}
+		$a = 1;
+		$b = 10;
+		add($a);
+		echo "a is $a,";
+		add($b);
+		echo " a is $a, and b is $b"; // a is 2, a is 2, and b is 11
+	Ex:
+		$array = array(1,2,3,4);
+		foreach ($array as &$value){
+		$value = $value + 10;
+		}
+		unset ($value); // Must be included, $value remains after foreach loop
+		print_r($array); //Array ( [0] => 11 [1] => 12 [2] => 13 [3] => 14 )
+		
 ## Initializing
 * Variables typing is set automacatically by the PHP parser and called "Type juggling/coercion"
 * Initializing variables empty is a good practice if it is possible it already points to memory values and you want to start empty
@@ -196,27 +232,46 @@
 	* $FOO = <EXPRESSION> ?: <VALUE IF FALSE>;
 * Null coalesce operator (REVISAR)
 	* Null coalescing assignment form: No E_NOTICE if no value (best pratice)
-	* $foo = <expression> ?? <value if false>;
+	* $value = $_GET['id'] ?? 1; (checks if the value of $_GET['id'] is null. If not, returns id. If it is, returns 1)
+	
 * Spaceship operator, short form
 	* A <=> B
 	* Return 1 if A > B, -1 if B > A, 0 if A == B
 * SWITCH
 	* Use to evaluate (Boolean Value) against a series of conditions, to determine which code to execute for each condition
-
+	switch ($i) {
+	    case 0:
+		echo "i equals 0";
+		break;
+	    case 1:
+		echo "i equals 1";
+		break;
+	    case 2:
+		echo "i equals 2";
+		break;
+	}
 ## Loops
 
 * WHILE
 	* Executes statement until condition is no longe evaluated as boolean true; condition evaluated at beginning
-
+	while (salario < 5000) 
+        {
+                salario *= 100; 
+        }
 * DO-WHILE - (REVISAR)
 	* Executed statement until condition is no longer evaluated as boolean true; condition evaluated at end
-
+	do {
+		salario *= 100;
+	} while (salario < 5000)
 * FOR
 	* Has three statements in parentheses, executes first statement as a one time assignment. Iteration continues while the second statement (a loop condition) is no longer evaluated as boolean true. Third statement is executed at the end of each iteration
 
-* FOREACH - REVISAR sintaxes do foreache
+* FOREACH 
 	* Used only for arrays; assigns value of current element to the variable and advances the array pointer util it reaches the last element
-
+	foreach (array_expression as $value) ($value of each position can be used in the foreach)
+	    statement
+	foreach (array_expression as $key => $value) (both the $key and the $value are available in the foreach)
+	    statement
 * CONTINUE
 	* Within loops, used to skip subsequent code within the iteration and jump to the next condition evaluation step
 
@@ -245,13 +300,25 @@
 	* Returns boolean true on an empty value passed in: a no element array, 0, 0.0 ...
 
 * eval() (REVISAR)
-	* Used to evaluate the contents of a string as php code
+	* Used to evaluate the contents of a string as php code. It executes the string passed as a php code.
+	$string = 'taça';
+	$name = 'café';
+	$str = 'Esta é uma $string com o meu $name nela.';
+	echo $str; //Esta é uma taça com o meu café nela.
 
 * include and include_once()  (REVISAR)
 	* Used to both include and evaluate a file
 
 * require() and require_once()  - (REVISAR)
 	* These constructs are similar to include() and include_once(), except that a failure in execution results in a fatal error, while include() generates a warning
+	
+### Functional Difference :
+
+include vs include_once : There is only one difference between include() and include_once(). If the code from a file has been already included then it will not be included again if we use include_once(). Means include_once() include the file only once at a time.
+
+include vs require : if include() is not able to find a specified file on location at that time it will throw a warning however, it will not stop script execution. For the same scenario, require() will throw a fatal error and it will stop the script execution.
+
+require vs require_once : There is only one difference between require() and require_once(). If the code from a file has been already included then it will not be included again if we use require_once(). Means require_once() include the file only once at a time.
 
 ## Other Constructs
 
@@ -290,7 +357,7 @@
 
 ## Definition
 
-* PHP provides a set of predefined constants defined by the PHP core (Ex> E_ERROR; TRUE) (REVISAR)
+* PHP provides a set of predefined constants defined by the PHP core (Ex> E_ERROR; TRUE)
 
 * Several of these can change, depending upon where they are used; therefore, not true constants (EX: __DIR__; __NAMESPACE__)
 	* __DIR__: returns the current working directory;
@@ -373,13 +440,40 @@ Example:
 
 ## PECL (PHP Extension Community Library)
 
-	* Repository for PHP extensions; similar structure and concept to the php code repository PEAR (PHP Extension and Application Repository) (REVISAR)
+	* Repository for PHP extensions; similar structure and concept to the php code repository PEAR (PHP Extension and Application Repository). PECL is the repository and its extensions can be installed through the PEAR commands
 
-## CORE Extensions (REVISAR)
-
+## CORE Extensions 
 	* There are a set of various php language elements, called core extensions, that are part of the php core
-
-	* They include specific arrays, classes, objects, etc
+	* They include specific arrays, classes, objects, etc.
+	* They cannot be left out of the PHP compilation
+		* Arrays
+		* Classes/Objects
+		* CSPRNG
+		* Date/Time
+		* Directories
+		* Error Handling
+		* Program execution
+		* Filesystem
+		* Filter
+		* Function Handling
+		* Hash
+		* PHP Options/Info
+		* Mail
+		* Math
+		* Misc.
+		* Network
+		* Output Control
+		* Password Hashing
+		* Phar
+		* Reflection
+		* POSIX Regex
+		* Sessions
+		* SPL
+		* Streams
+		* Strings
+		* Tokenizer
+		* URLs
+		* Variable handling
 
 ## Userland rules
 	
@@ -398,7 +492,7 @@ Example:
 ## Internal Naming
 
 	* Functions use underscores between words
-	* Classes us the CamelCase rule
+	* Classes use the CamelCase rule
 	* The double underscore prefix is reserved, and refers to elements considered magical
 
 # 9 - Configuration
@@ -410,7 +504,7 @@ Example:
 ## PHP.INI
 
 	* Configuration file for PHP
-	* File run upon server starting (CGI) or upon invocation (CLI) (REVISAR)
+	* File run upon server starting (CGI) or upon invocation (CLI). PHP CLI is the command-line interface for PHP (e.g. for creating standalone applications). PHP CGI is the common gateway interface for PHP (e.g. for web applications)
 	* Search Order under Windows:
 		* sapi MODULE > phprc VARIABLE > Registry Keys > HKEY_LOCAL_MACHINE\software\php > Working Directory (NOT CLI) > Directory (SERVER or PHP) > Win Directory (REVISAR)
 
@@ -418,7 +512,7 @@ Example:
 
 	* PHP Supports user type ini files
 
-		* Processed by cgi/fastcgi SAPI (REVISAR)
+		* Processed by cgi/fastcgi SAPI. SAPI ( Server Application Programming Interface ) also know as ISAPI ( Internet Server Application Programming Interface) for Microsoft, NSAPI (Netscape Server Application Programming Interface) for Netscape. It is the mechanism that controls the interaction between the "outside world" and the PHP/Zend engine.
 		* Must use PHP_INI_PERDIR or PHP_INI_USER
 
 	* PHP searches for these ini files in all directories
@@ -440,12 +534,12 @@ Example:
 
 ## Garbage Collection
 
-	* Clears circular-reference variables (REVISAR) once prerequisites are met, via root-buffer full or call to the function GC_COLLECT_CYCLES()
-	* Garbage Collection Execution hinders perfomance (REVISAR)
+	* Clears circular-reference variables  once prerequisites are met, via root-buffer full or call to the function GC_COLLECT_CYCLES()
+	* Garbage Collection Execution hinders perfomance
 
 ## OPCODE CACHE
-
-	* Stores the bytecode/opcode (REVISAR) results of compiling PHP code which often improves perfomance
-	* Available into PHP (needs to be turned on). third-party products are also available (REVISAR)
+	OpCode Caches are a performance enhancing extension for PHP. They do this by injecting themselves into the execution life-cycle of PHP and caching the results of the compilation phase for later reuse. It is not uncommon to see a 3x performance increase just by enabling an OpCode cache.
+	* Stores the bytecode/opcode results of compiling PHP code which often improves perfomance
+	* Available into PHP (needs to be turned on). third-party products are also available
 
 
